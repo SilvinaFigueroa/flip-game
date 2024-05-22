@@ -1,0 +1,58 @@
+/* Center all the elements on the body */
+body {
+    background-color: antiquewhite;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#container {
+    margin-top: 100px;
+    width: 350px; 
+    height: 200px;
+    background-color: lightblue;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+#userForm {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+#userForm input[type="text"],
+#userForm input[type="submit"] {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#userForm input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+#userForm input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+#userForm label {
+    margin-bottom: 10px;
+}
+
+
+.card{
+    background-color: rgb(238, 3, 3);
+    border: none;
+    border-radius: 50px;
+}
+
+
