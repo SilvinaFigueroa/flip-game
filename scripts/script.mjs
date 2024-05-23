@@ -1,7 +1,7 @@
 
 let form = document.getElementById("userForm")
 let container = document.getElementById("container")
-let gridSize = 5;
+let gridSize = 8;
 
 console.log(gridSize)
 
