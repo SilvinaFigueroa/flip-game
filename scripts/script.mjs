@@ -2,6 +2,9 @@
 let form = document.getElementById("userForm")
 let formContainer = document.getElementById("form-container")
 let gridSize = 3;
+let difficulty = 3;
+let gameLog = [];
+let move = 0;
 
 // Create container for the game grid
 let gridContainer = document.createElement("div")
@@ -41,6 +44,21 @@ function playGame() {
     formContainer.remove()
     gridContainer.appendChild(table)
     document.body.append(gridContainer)
+
+    // User random clicks to create a solvable game 
+    for(let i = 0 ; i < difficulty; i++){
+        let y = Math.random() * gridSize | 0;
+        let x = Math.random() * gridSize | 0;
+        console.log(`Random click ${y}, ${x}`)
+
+        let randomCell = table.rows[y].cells[x]
+        flipCard({target: randomCell})
+    }
+
+
+
+
+
 }
 
 table.addEventListener('click', (cardClicked) => {
@@ -52,21 +70,43 @@ table.addEventListener('click', (cardClicked) => {
 })
 
 function flipCard(clickedCell) {
-    // Read indexed of table: (cell, row)
+    // Read indexes of table: (cell, row)
     let cellIndex = clickedCell.target.cellIndex;
     let rowIndex = clickedCell.target.parentNode.rowIndex;
+    let cellClicked = clickedCell.target
 
-    clickedCell.target.style.backgroundColor = "green";
-    clickedCell.target.classList.add('flip-card')
+    // console.log(cellIndex, rowIndex)
+    let top, down, left, right;
 
-    console.log(cellIndex, rowIndex)
+    transform(cellClicked)
+    move ++
+    gameLog += `Flip # ${move} | cell ${cellIndex} row ${rowIndex} \n`;
+    console.log(gameLog)
 
-    // (rowIndex, cellIndex + 1).style.backgroundColor = "green"
-
-    // Validation: The index of the row is-1 if the row is not part of a table.
-
-    // let table = clickedCell.parentNode.parentNode; // This is the table element
-    // if (table.rows[rowIndex] && table.rows[rowIndex].cells[cellIndex + 1]) {
-    //     table.rows[rowIndex].cells[cellIndex + 1].style.backgroundColor = "green";
+    if (cellIndex - 1 >= 0 && cellIndex - 1 < gridSize) {
+        left = table.rows[rowIndex].cells[cellIndex - 1]
+        transform(left)
     }
+    if (rowIndex - 1 >= 0 && rowIndex - 1 < gridSize) {
+        down = table.rows[rowIndex - 1].cells[cellIndex]
+        transform(down)
+    }
+    if (cellIndex + 1 >= 0 && cellIndex + 1 < gridSize) {
+        right = table.rows[rowIndex].cells[cellIndex + 1]
+        transform(right)
+    }
+    if (rowIndex + 1 >= 0 && rowIndex + 1 < gridSize) {
+        top = table.rows[rowIndex + 1].cells[cellIndex]
+        transform(top)
+    }
+}
+
+function transform(card) {
+    if(card.style.backgroundColor == "green")
+    card.style.backgroundColor = "red"
+    else{
+        card.style.backgroundColor = "green"
+    }
+}
+
 
