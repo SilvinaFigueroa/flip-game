@@ -1,8 +1,10 @@
 
 let form = document.getElementById("userForm")
 let formContainer = document.getElementById("form-container")
-let gridSize = 3;
-let difficulty = 3;
+
+let gridSize , difficulty
+
+//Internal validati ons
 let gameLog = [];
 let move = 0;
 
@@ -10,8 +12,6 @@ let move = 0;
 let gridContainer = document.createElement("div")
 gridContainer.classList.add('grid-container')
 
-
-console.log(gridSize)
 
 // When form submited, initialize the game
 form.addEventListener('submit', (event) => {
@@ -24,6 +24,8 @@ let table = document.createElement("table")
 console.log(`Table created`)
 
 function playGame() {
+    gridSize = document.querySelector("input[type='radio'][name=gridSize]:checked").value;
+    difficulty = document.getElementById("difficulty").value
 
     for (let i = 0; i < gridSize; i++) {
         // create each row
@@ -54,11 +56,6 @@ function playGame() {
         let randomCell = table.rows[y].cells[x]
         flipCard({target: randomCell})
     }
-
-
-
-
-
 }
 
 table.addEventListener('click', (cardClicked) => {
@@ -99,6 +96,9 @@ function flipCard(clickedCell) {
         top = table.rows[rowIndex + 1].cells[cellIndex]
         transform(top)
     }
+
+    checkWinner()
+
 }
 
 function transform(card) {
@@ -109,4 +109,16 @@ function transform(card) {
     }
 }
 
+function checkWinner(){
+    
+    let allCells = table.querySelectorAll('td')
+    let tableSize = allCells.length
 
+    for(const cell of allCells){
+        
+
+    }    
+
+
+
+}

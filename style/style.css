@@ -1,35 +1,43 @@
 /* Center all the elements on the body */
 
-
 html, body {
     background-color: antiquewhite;
-    height: 100%;
     margin: auto;
     display: flex;
     justify-content: center;
-    /* align-items: center; */
+    font-family: 'Arial', sans-serif;
 }
 
 
 #form-container {
-    margin-top: 100px;
+    margin-top: 50px;
+    margin-bottom: 20px;
     background-color: lightblue;
-    padding: 20px;
+    padding: 30px;
     border-radius: 20px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     display: flex;   
     height:max-content;
+    text-align: center;
 
+}
+
+form label, form p {
+    margin: 15px 0 5px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
 }
 
 #userForm {
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 #userForm input[type="text"],
-#userForm input[type="submit"] {
+#userForm input[type="submit"],
+#userForm select {
     margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -53,17 +61,16 @@ html, body {
 
 
 .grid-container {
-    margin-top: 30px;
+    margin-top: 100px;
     background-color: rgb(11, 177, 232);
     border-radius: 20px;
     padding: 5%;
     position: relative; 
     display: flex;              
-    /* flex-wrap: wrap;             */
     justify-content: center;    
-    /* align-items: flex-start;        */
-    align-content: center;   
-    /* height:min-content; */
+    align-content: center; 
+    /* Keep the card shapes as square even when the viewport height changes   */
+    aspect-ratio: 1 
    
 }
 
@@ -71,12 +78,9 @@ html, body {
     background-color: rgb(238, 3, 3);
     border: 5px solid rgb(11, 177, 232); 
     border-radius: 20px;
-    row-gap: 5px;
-    column-gap: 2em;
-    /* height: 200px; */
+    /* row-gap: 5px;
+    column-gap: 2em; */
     width: 200px;
-    object-fit: cover;
-
 }
 
 @media (max-width: 1080px) {
