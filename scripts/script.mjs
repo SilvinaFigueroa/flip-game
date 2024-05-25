@@ -1,7 +1,13 @@
 
 let form = document.getElementById("userForm")
 let formContainer = document.getElementById("form-container")
+// let menu = document.
 let gridSize, difficulty, userName
+
+let starOver = document.createElement("button")
+let reset = document.createElement("button")
+let close = document.createElement("button")
+
 
 //Internal validations - Game Status
 let gameLog = [];
@@ -11,6 +17,7 @@ let userMove
 // Create container for the game grid
 let gridContainer = document.createElement("div")
 gridContainer.classList.add('grid-container')
+
 let gameStats = document.createElement("div")
 
 // create table
@@ -28,7 +35,7 @@ let numMoves = document.createElement("p")
 // When form submited, initialize the game
 form.addEventListener('submit', (event) => {
     event.preventDefault()
-
+    
     userName = document.getElementById("userName").value
     difficulty = document.getElementById("difficulty").value
     if (difficulty === "") {
@@ -45,8 +52,6 @@ form.addEventListener('submit', (event) => {
     }
     playGame()
 })
-
-
 
 function playGame() {
 
@@ -78,7 +83,6 @@ function playGame() {
     userStats.appendChild(numMoves)
     document.body.appendChild(userStats)
 
-    // Create container for game status
     gameStats.classList.add("game-stats")
     document.body.appendChild(gameStats)
 
@@ -116,7 +120,7 @@ function flipCard(clickedCell) {
     console.log(allMoves)
     if (userMove > 0) {
         numMoves.innerText = `Numbers of total flips ${userMove}`
-        gameLog += `Flip # ${userMove} | row ${rowIndex + 1}            cell ${cellIndex + 1}  <br>`;
+        gameLog += `Flip # ${userMove} | row ${rowIndex + 1} cell ${cellIndex + 1}  <br>`;
     }
 
     if (cellIndex - 1 >= 0 && cellIndex - 1 < gridSize) {
@@ -136,13 +140,16 @@ function flipCard(clickedCell) {
         transform(top)
     }
 
-    checkWinner()
+    // Adding time out to prevent the alert to appears before the card flips
+    setTimeout(function() {
+        checkWinner()
+    },  10);
 
+    
 }
 
 function transform(card) {
     card.classList.toggle("card-back")
-
 }
 
 function checkWinner() {
@@ -152,10 +159,9 @@ function checkWinner() {
     let front = 0;
     let back = 0;
 
-
     for (const cell of getCells) {
         if (cell.classList.contains("card-back")) {
-            back++
+            back++  
         }
         else { front++ }
     }
@@ -167,9 +173,27 @@ function checkWinner() {
         console.log("Keep playing!");
     }
 
-    gameStats.innerHTML = gameLog
+    let log = gameStats.innerHTML = gameLog
 
+    let statsFragment = document.createDocumentFragment()
+    statsFragment.appendChild(log)
+    gameStats.parentElement.append(statsFragment);
 }
 
+// Button to reset the game with the same user options (grid - difficulty) 
+starOver.addEventListener('click', () => {
+    playGame()
+})
+
+// Button to reload page and go to initial configurations
+reset.addEventListener('click', () => {
+    window.location.reload()
+})
+
+// close window
+close.addEventListener('click', () => {
+    window.close()
+    
+})
 
 
