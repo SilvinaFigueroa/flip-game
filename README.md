@@ -41,3 +41,5 @@ The grid will be initialized, and random flips will be made based on the selecte
 Enjoy the game and try to get all squares to the same color with the least number of moves!
 
 ---
+Game published on https://silvinafigueroa.github.io/flip-game/
+
