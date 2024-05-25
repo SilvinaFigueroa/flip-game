@@ -1,24 +1,40 @@
-
 let form = document.getElementById("userForm")
 let formContainer = document.getElementById("form-container")
-// let menu = document.
+let menu = document.createElement('nav')
 let gridSize, difficulty, userName
 
-let starOver = document.createElement("button")
-let reset = document.createElement("button")
-let close = document.createElement("button")
 
+// Create container for the game grid
+let gridContainer = document.createElement("div")
+gridContainer.classList.add('grid-container')
+let gameStats = document.createElement("div")
+
+// navigation buttons 
+let starOver = document.createElement("button")
+starOver.innerText = "Start New Game";
+let reset = document.createElement("button")
+reset.innerText = "Reset Current Game";
+
+menu.append(starOver, reset)
+starOver.classList.add("nav-button")
+reset.classList.add("nav-button")
+menu.classList.add("nav")
+
+
+// Button to reset the game with the same user options (grid - difficulty) 
+starOver.addEventListener('click', () => {
+    window.location.reload()
+})
+
+// Button to reload page and go to initial configurations
+reset.addEventListener('click', () => {
+    playGame()
+})
 
 //Internal validations - Game Status
 let gameLog = [];
 let allMoves = 0
 let userMove
-
-// Create container for the game grid
-let gridContainer = document.createElement("div")
-gridContainer.classList.add('grid-container')
-
-let gameStats = document.createElement("div")
 
 // create table
 let table = document.createElement("table")
@@ -35,7 +51,8 @@ let numMoves = document.createElement("p")
 // When form submited, initialize the game
 form.addEventListener('submit', (event) => {
     event.preventDefault()
-    
+
+    // Form validation     
     userName = document.getElementById("userName").value
     difficulty = document.getElementById("difficulty").value
     if (difficulty === "") {
@@ -43,7 +60,6 @@ form.addEventListener('submit', (event) => {
         return
     }
 
-    userMove = - difficulty;
     try {
         gridSize = document.querySelector("input[type='radio'][name=gridSize]:checked").value;
     } catch (event) {
@@ -52,8 +68,13 @@ form.addEventListener('submit', (event) => {
     }
     playGame()
 })
-
 function playGame() {
+    // Clear table content and log
+    table.innerHTML = ''
+    gameLog = []
+    allMoves = 0
+    
+    userMove = - difficulty;
 
     for (let i = 0; i < gridSize; i++) {
         // create each row
@@ -67,7 +88,7 @@ function playGame() {
             console.log(`cell ${j} created`)
             row.appendChild(cell)
         }
-        // attach row with all the cells to the table
+        // Attach row with all the cells to the table
         table.appendChild(row)
     }
     // Remove the form container to replace it with the gridContainer (game)
@@ -75,7 +96,7 @@ function playGame() {
     gridContainer.appendChild(table)
     document.body.append(gridContainer)
 
-
+    // Add information to UserStats 
     statsTitle.innerText = `Player ${userName}`
     gameInfo.innerText = `Game Size: ${gridSize} | Difficulty: ${difficulty}`
     userStats.appendChild(statsTitle)
@@ -86,7 +107,10 @@ function playGame() {
     gameStats.classList.add("game-stats")
     document.body.appendChild(gameStats)
 
-    // User random clicks to create a solvable game 
+    // Attach menu to body before the first child
+    document.body.insertBefore(menu, document.body.firstChild);
+
+    // Random clicks to create a solvable game 
     for (let i = 0; i < difficulty; i++) {
         let y = Math.random() * gridSize | 0;
         let x = Math.random() * gridSize | 0;
@@ -141,11 +165,11 @@ function flipCard(clickedCell) {
     }
 
     // Adding time out to prevent the alert to appears before the card flips
-    setTimeout(function() {
+    setTimeout(function () {
         checkWinner()
-    },  10);
+    }, 10);
 
-    
+
 }
 
 function transform(card) {
@@ -161,7 +185,7 @@ function checkWinner() {
 
     for (const cell of getCells) {
         if (cell.classList.contains("card-back")) {
-            back++  
+            back++
         }
         else { front++ }
     }
@@ -175,25 +199,12 @@ function checkWinner() {
 
     let log = gameStats.innerHTML = gameLog
 
-    let statsFragment = document.createDocumentFragment()
-    statsFragment.appendChild(log)
-    gameStats.parentElement.append(statsFragment);
+    // ---- TODO : Wrap the logs on a fragment 
+    // let statsFragment = document.createDocumentFragment()
+    // statsFragment.appendChild(log)
+    // gameStats.parentElement.append(statsFragment);
 }
 
-// Button to reset the game with the same user options (grid - difficulty) 
-starOver.addEventListener('click', () => {
-    playGame()
-})
 
-// Button to reload page and go to initial configurations
-reset.addEventListener('click', () => {
-    window.location.reload()
-})
-
-// close window
-close.addEventListener('click', () => {
-    window.close()
-    
-})
 
 

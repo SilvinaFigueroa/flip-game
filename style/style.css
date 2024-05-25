@@ -1,6 +1,7 @@
 /* Center all the elements on the body */
 
-html, body {
+html,
+body {
     background-color: antiquewhite;
     margin: auto;
     display: flex;
@@ -17,13 +18,14 @@ html, body {
     padding: 30px;
     border-radius: 20px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    display: flex;   
-    height:max-content;
+    display: flex;
+    height: max-content;
     text-align: center;
 
 }
 
-form label, form p {
+form label,
+form p {
     margin: 15px 0 5px;
     font-weight: bold;
     color: #333;
@@ -66,67 +68,88 @@ form label, form p {
     background-color: rgb(11, 177, 232);
     border-radius: 20px;
     padding: 5%;
-    position: relative; 
-    display: flex;              
-    justify-content: center;    
-    align-content: center; 
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-content: center;
     /* Keep the card shapes as square even when the viewport height changes   */
-    aspect-ratio: 1 
-   
+    aspect-ratio: 1
 }
 
-.card{
+.card {
     background-color: rgb(238, 3, 3);
-    border: 5px solid rgb(11, 177, 232); 
+    border: 5px solid rgb(11, 177, 232);
     border-radius: 20px;
     /* row-gap: 5px;
     column-gap: 2em; */
     width: 200px;
 }
 
-.card-back{
-    background-color:green;
+.card-back {
+    background-color: green;
 }
 
-.game-stats{
+.game-stats {
     margin-top: 20px;
     background-color: rgb(18, 232, 11);
     border-radius: 20px;
     padding: 5%;
-    position: relative; 
+    position: relative;
     display: flex;
-    flex-wrap: wrap;              
-    justify-content: center;    
-    align-content: center; 
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
 }
 
-.userStats{
+.userStats {
     text-align: center;
 
 }
 
+.nav-button {
+    margin-top: 10px;
+    display: block;
+    width: 45%;
+    border-radius: 10px;
+    border: none;
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.nav-button:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.nav{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-content: center;
+}
+
+
 @media (max-width: 1080px) {
     .card {
-        height: 150px; 
-        width: 150px;  
+        height: 150px;
+        width: 150px;
     }
 }
 
 @media (max-width: 760px) {
     .card {
-        height: 100px; 
-        width: 100px;  
+        height: 100px;
+        width: 100px;
     }
 }
 
 @media (max-width: 600px) {
     .card {
-        height: 75px; 
-        width: 75px;  
+        height: 75px;
+        width: 75px;
     }
 }
-
-.flip-card{
-    transform: rotate(180deg);
-}
-
