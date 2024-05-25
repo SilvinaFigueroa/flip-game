@@ -83,6 +83,10 @@ form label, form p {
     width: 200px;
 }
 
+.card-back{
+    background-color:green;
+}
+
 @media (max-width: 1080px) {
     .card {
         height: 150px; 

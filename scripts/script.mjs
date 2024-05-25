@@ -2,7 +2,7 @@
 let form = document.getElementById("userForm")
 let formContainer = document.getElementById("form-container")
 
-let gridSize , difficulty
+let gridSize, difficulty
 
 //Internal validati ons
 let gameLog = [];
@@ -48,13 +48,13 @@ function playGame() {
     document.body.append(gridContainer)
 
     // User random clicks to create a solvable game 
-    for(let i = 0 ; i < difficulty; i++){
+    for (let i = 0; i < difficulty; i++) {
         let y = Math.random() * gridSize | 0;
         let x = Math.random() * gridSize | 0;
         console.log(`Random click ${y}, ${x}`)
 
         let randomCell = table.rows[y].cells[x]
-        flipCard({target: randomCell})
+        flipCard({ target: randomCell })
     }
 }
 
@@ -76,7 +76,7 @@ function flipCard(clickedCell) {
     let top, down, left, right;
 
     transform(cellClicked)
-    move ++
+    move++
     gameLog += `Flip # ${move} | cell ${cellIndex} row ${rowIndex} \n`;
     console.log(gameLog)
 
@@ -102,23 +102,32 @@ function flipCard(clickedCell) {
 }
 
 function transform(card) {
-    if(card.style.backgroundColor == "green")
-    card.style.backgroundColor = "red"
-    else{
-        card.style.backgroundColor = "green"
+    card.classList.toggle("card-back")
+
+}
+
+function checkWinner() {
+
+    let getCells = table.querySelectorAll('td')
+    let tableSize = getCells.length
+    let front = 0;
+    let back = 0;
+
+
+    for (const cell of getCells) {
+        if (cell.classList.contains("card-back")) {
+            back++
+        }
+        else { front++ }
+    }
+
+    console.log(`Front ${front} and Back ${back}`)
+    if (front === tableSize || back === tableSize) {
+        console.log("We have a winner!");
+    } else {
+        console.log("Keep playing!");
     }
 }
 
-function checkWinner(){
-    
-    let allCells = table.querySelectorAll('td')
-    let tableSize = allCells.length
-
-    for(const cell of allCells){
-        
-
-    }    
 
 
-
-}
