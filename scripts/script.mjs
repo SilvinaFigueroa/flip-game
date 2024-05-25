@@ -1,31 +1,54 @@
 
 let form = document.getElementById("userForm")
 let formContainer = document.getElementById("form-container")
+let gridSize, difficulty, userName
 
-let gridSize, difficulty
-
-//Internal validati ons
+//Internal validations - Game Status
 let gameLog = [];
-let move = 0;
+let allMoves = 0
+let userMove
 
 // Create container for the game grid
 let gridContainer = document.createElement("div")
 gridContainer.classList.add('grid-container')
-
-
-// When form submited, initialize the game
-form.addEventListener('submit', (event) => {
-    event.preventDefault()
-    playGame()
-})
+let gameStats = document.createElement("div")
 
 // create table
 let table = document.createElement("table")
 console.log(`Table created`)
 
-function playGame() {
-    gridSize = document.querySelector("input[type='radio'][name=gridSize]:checked").value;
+// Add Title and user infor to GameStats
+let userStats = document.createElement("div")
+userStats.classList.add("userStats")
+let statsTitle = document.createElement('h1')
+let gameInfo = document.createElement("h3")
+let numMoves = document.createElement("p")
+
+
+// When form submited, initialize the game
+form.addEventListener('submit', (event) => {
+    event.preventDefault()
+
+    userName = document.getElementById("userName").value
     difficulty = document.getElementById("difficulty").value
+    if (difficulty === "") {
+        window.alert("Please select an option for game difficulty")
+        return
+    }
+
+    userMove = - difficulty;
+    try {
+        gridSize = document.querySelector("input[type='radio'][name=gridSize]:checked").value;
+    } catch (event) {
+        window.alert("Please select your game size")
+        return
+    }
+    playGame()
+})
+
+
+
+function playGame() {
 
     for (let i = 0; i < gridSize; i++) {
         // create each row
@@ -46,6 +69,18 @@ function playGame() {
     formContainer.remove()
     gridContainer.appendChild(table)
     document.body.append(gridContainer)
+
+
+    statsTitle.innerText = `Player ${userName}`
+    gameInfo.innerText = `Game Size: ${gridSize} | Difficulty: ${difficulty}`
+    userStats.appendChild(statsTitle)
+    userStats.appendChild(gameInfo)
+    userStats.appendChild(numMoves)
+    document.body.appendChild(userStats)
+
+    // Create container for game status
+    gameStats.classList.add("game-stats")
+    document.body.appendChild(gameStats)
 
     // User random clicks to create a solvable game 
     for (let i = 0; i < difficulty; i++) {
@@ -76,9 +111,13 @@ function flipCard(clickedCell) {
     let top, down, left, right;
 
     transform(cellClicked)
-    move++
-    gameLog += `Flip # ${move} | cell ${cellIndex} row ${rowIndex} \n`;
-    console.log(gameLog)
+    userMove++
+    allMoves++
+    console.log(allMoves)
+    if (userMove > 0) {
+        numMoves.innerText = `Numbers of total flips ${userMove}`
+        gameLog += `Flip # ${userMove} | row ${rowIndex + 1}            cell ${cellIndex + 1}  <br>`;
+    }
 
     if (cellIndex - 1 >= 0 && cellIndex - 1 < gridSize) {
         left = table.rows[rowIndex].cells[cellIndex - 1]
@@ -123,10 +162,13 @@ function checkWinner() {
 
     console.log(`Front ${front} and Back ${back}`)
     if (front === tableSize || back === tableSize) {
-        console.log("We have a winner!");
+        window.alert("We have a winner!");
     } else {
         console.log("Keep playing!");
     }
+
+    gameStats.innerHTML = gameLog
+
 }
 
 

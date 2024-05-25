@@ -12,24 +12,27 @@
 <body>
     <div id="form-container">
         <form id="userForm">
-            <input type="text" id="userName" name="userName" placeholder="Type your name here!" required />
-            <!-- <input type="text" id="email" name="email" placeholder="Email" /> -->
+            <input type="text" id="userName" name="userName" placeholder="Type your name here!" required
+                oninvalid="this.setCustomValidity('We need your name to start playing!')"
+                oninput="this.setCustomValidity('')" />
+                
             <label for="difficulty">Choose the game difficulty:</label>
             <select id="difficulty" name="difficulty">
-                <option value="2">Easy</option>
-                <option value="4">Medium</option> 
-                <option value="6">Hard</option> 
+                <option value="" disabled selected>Select one option</option>
+                <option value="3">Easy</option>
+                <option value="5">Medium</option>
+                <option value="7">Hard</option>
             </select>
             <div style="margin-bottom: 20px;">
-            <p style="text-align: center;">Select your game size</p>
-            <input type="radio" id="gridSize 3" name ="gridSize" value="3">
-            <label for="gridSize 3">3 x 3</label>
-            <input type="radio" id="gridSize 4" name ="gridSize" value="4">
-            <label for="gridSize 3">4 x 4</label>
-            <input type="radio" id="gridSize 5" name ="gridSize" value="5">
-            <label for="gridSize 3">5 x 5</label>
+                <p style="text-align: center;">Select your game size</p>
+                <input type="radio" id="gridSize 3" name="gridSize" value="3">
+                <label for="gridSize 3">3 x 3</label>
+                <input type="radio" id="gridSize 4" name="gridSize" value="4">
+                <label for="gridSize 3">4 x 4</label>
+                <input type="radio" id="gridSize 5" name="gridSize" value="5">
+                <label for="gridSize 3">5 x 5</label>
             </div>
-            <input type="submit" id ="submit" value="Let's Play!">
+            <input type="submit" id="submit" value="Let's Play!">
         </form>
     </div>
 </body>
