@@ -10,8 +10,7 @@ body {
     flex-direction: column;
 }
 
-
-#form-container {
+ #form-container {
     margin-top: 50px;
     margin-bottom: 20px;
     background-color: lightblue;

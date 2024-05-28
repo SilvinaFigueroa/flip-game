@@ -10,8 +10,16 @@
 </head>
 
 <body>
+
     <div id="form-container">
         <form id="userForm">
+            <div class="intro">
+                <h1>Flip the Cards</h1>
+                <p>
+                    Your goal is to flip squares until they all show the same color<br>
+                     <br><hr>
+                </p>
+            </div>
             <input type="text" id="userName" name="userName" placeholder="Type your name here!" required
                 oninvalid="this.setCustomValidity('We need your name to start playing!')"
                 oninput="this.setCustomValidity('')" />
