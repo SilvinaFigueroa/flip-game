@@ -191,7 +191,11 @@ function checkWinner() {
 
     console.log(`Front ${front} and Back ${back}`)
     if (front === tableSize || back === tableSize) {
-        window.alert("We have a winner!");
+        window.showCustomAlert(`We have a winner! <br>
+        ${userName} solved the game in ${userMove} moves <br>
+    
+        Game Size: ${gridSize} | Difficulty: ${difficulty}`
+        );
     } else {
         console.log("Keep playing!");
     }
@@ -227,3 +231,27 @@ function updateLog(row, cell) {
 }
 
 
+// --------------extra
+function showCustomAlert(message) {
+    let customAlert = document.getElementById("customAlert");
+    let customAlertMessage = document.getElementById("customAlertMessage");
+    customAlertMessage.innerHTML = message;
+    customAlert.style.display = "block";
+
+    let closeBtn = document.querySelector(".custom-alert-close");
+    let okBtn = document.getElementById("customAlertButton");
+
+    closeBtn.onclick = function() {
+        customAlert.style.display = "none";
+    };
+
+    okBtn.onclick = function() {
+        customAlert.style.display = "none";
+    };
+
+    window.onclick = function(event) {
+        if (event.target === customAlert) {
+            customAlert.style.display = "none";
+        }
+    };
+}
