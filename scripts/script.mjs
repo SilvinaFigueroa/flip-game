@@ -192,9 +192,9 @@ function checkWinner() {
     console.log(`Front ${front} and Back ${back}`)
     if (front === tableSize || back === tableSize) {
         window.showCustomAlert(`We have a winner! <br>
-        ${userName} solved the game in ${userMove} moves <br>
-    
-        Game Size: ${gridSize} | Difficulty: ${difficulty}`
+        <b>${userName}</b> solved the game in <b>${userMove}</b> moves\n 
+        <hr>
+        \n Game Size: ${gridSize} | Difficulty: ${difficulty}`
         );
     } else {
         console.log("Keep playing!");
