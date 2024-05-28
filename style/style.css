@@ -20,7 +20,6 @@ body {
     display: flex;
     height: max-content;
     text-align: center;
-
 }
 
 form label,
@@ -147,6 +146,11 @@ align-content: center;
 
     .nav-button{
         font-size: 12px;
+    }
+
+    #form-container{
+        margin-left: 4%;
+        margin-right: 4%;    
     }
 }
 
