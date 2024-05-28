@@ -243,10 +243,12 @@ function showCustomAlert(message) {
 
     closeBtn.onclick = function() {
         customAlert.style.display = "none";
+       
     };
 
     okBtn.onclick = function() {
         customAlert.style.display = "none";
+        window.location.reload()
     };
 
     window.onclick = function(event) {
@@ -254,4 +256,5 @@ function showCustomAlert(message) {
             customAlert.style.display = "none";
         }
     };
+
 }
