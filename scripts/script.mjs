@@ -32,9 +32,10 @@ reset.addEventListener('click', () => {
 })
 
 //Internal validations - Game Status
-let gameLog = [];
 let allMoves = 0
 let userMove
+let lastUserMove = 0;
+
 
 // create table
 let table = document.createElement("table")
@@ -83,7 +84,6 @@ table.addEventListener('click', (cardClicked) => {
 function playGame() {
     // Clear table content and log
     table.innerHTML = ''
-    gameLog = []
     allMoves = 0
 
     userMove = - difficulty; // Dificulty are flips done before the users start playing
@@ -201,18 +201,25 @@ function checkWinner() {
 function updateLog(row, cell) {
     userMove++ // Player clicks 
     allMoves++
-    console.log(allMoves) // Check all the moves from the beggining 
+    lastUserMove++
 
-    let logLine = document.createElement("p")
+    // create a fragment for the logs 
+    let statsFragment = document.createDocumentFragment()
+    let logLine = document.createElement("p") // Create a paragraph element to add to the fragment with the log
+
+    console.log(`Flip # ${allMoves} | row ${row + 1} cell ${cell + 1}`) // Check all the moves from the beggining 
+
     if (userMove > 0) { // all moves minus dificulty (flips done before the user start playing)
 
         numMoves.innerText = `Numbers of total flips ${userMove}`
         logLine.innerHTML = `Flip # ${userMove} | row ${row + 1} cell ${cell + 1}`;
-        // add the log to the gameLog array
-        gameLog.push(logLine)
 
-        // create a fragment for the logs 
-        let statsFragment = document.createDocumentFragment()
+        // Clear the gameStats after log the last 3 movements 
+        if(lastUserMove >= 3){
+            gameStats.innerHTML = "";
+            lastUserMove = 0;
+        }
+
         statsFragment.appendChild(logLine)
         gameStats.appendChild(statsFragment)
 

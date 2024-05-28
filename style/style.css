@@ -97,7 +97,6 @@ form p {
 
 .userStats {
     text-align: center;
-
 }
 
 .nav-button {
@@ -109,7 +108,7 @@ form p {
     background-color: #04AA6D;
     color: white;
     padding: 14px 28px;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
     text-align: center;
 }
@@ -145,5 +144,9 @@ align-content: center;
     .card {
         height: 75px;
         width: 75px;
+    }
+
+    .nav-button{
+        font-size: 12px;
     }
 }
