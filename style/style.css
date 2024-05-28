@@ -64,9 +64,9 @@ form p {
 
 
 .grid-container {
-    margin-top: 50px;
+    margin-top: 20px;
     background-color: rgb(11, 177, 232);
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 5%;
     position: relative;
     display: flex;
@@ -80,8 +80,6 @@ form p {
     background-color: rgb(238, 3, 3);
     border: 5px solid rgb(11, 177, 232);
     border-radius: 20px;
-    /* row-gap: 5px;
-    column-gap: 2em; */
     width: 150px;
 }
 
@@ -95,11 +93,7 @@ form p {
     border-radius: 20px;
     padding: 5%;
     position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-}
+    text-align: center;}
 
 .userStats {
     text-align: center;

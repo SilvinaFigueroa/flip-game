@@ -68,13 +68,25 @@ form.addEventListener('submit', (event) => {
     }
     playGame()
 })
+
+table.addEventListener('click', (cardClicked) => {
+    cardClicked.preventDefault()
+    console.log(cardClicked.target)
+    if (cardClicked.target instanceof HTMLTableCellElement) {
+        flipCard(cardClicked)
+    }
+})
+
+
+// ______________________FUNCTIONS
+
 function playGame() {
     // Clear table content and log
     table.innerHTML = ''
     gameLog = []
     allMoves = 0
-    
-    userMove = - difficulty;
+
+    userMove = - difficulty; // Dificulty are flips done before the users start playing
 
     for (let i = 0; i < gridSize; i++) {
         // create each row
@@ -110,7 +122,7 @@ function playGame() {
     // Attach menu to body before the first child
     document.body.insertBefore(menu, document.body.firstChild);
 
-    // Random clicks to create a solvable game 
+    // Dificulty = Random clicks to create a solvable game 
     for (let i = 0; i < difficulty; i++) {
         let y = Math.random() * gridSize | 0;
         let x = Math.random() * gridSize | 0;
@@ -121,13 +133,6 @@ function playGame() {
     }
 }
 
-table.addEventListener('click', (cardClicked) => {
-    cardClicked.preventDefault()
-    console.log(cardClicked.target)
-    if (cardClicked.target instanceof HTMLTableCellElement) {
-        flipCard(cardClicked)
-    }
-})
 
 function flipCard(clickedCell) {
     // Read indexes of table: (cell, row)
@@ -139,13 +144,8 @@ function flipCard(clickedCell) {
     let top, down, left, right;
 
     transform(cellClicked)
-    userMove++
-    allMoves++
-    console.log(allMoves)
-    if (userMove > 0) {
-        numMoves.innerText = `Numbers of total flips ${userMove}`
-        gameLog += `Flip # ${userMove} | row ${rowIndex + 1} cell ${cellIndex + 1}  <br>`;
-    }
+    updateLog(rowIndex, cellIndex);
+
 
     if (cellIndex - 1 >= 0 && cellIndex - 1 < gridSize) {
         left = table.rows[rowIndex].cells[cellIndex - 1]
@@ -168,13 +168,12 @@ function flipCard(clickedCell) {
     setTimeout(function () {
         checkWinner()
     }, 10);
-
-
 }
 
 function transform(card) {
     card.classList.toggle("card-back")
 }
+
 
 function checkWinner() {
 
@@ -197,14 +196,27 @@ function checkWinner() {
         console.log("Keep playing!");
     }
 
-    let log = gameStats.innerHTML = gameLog
-
-    // ---- TODO : Wrap the logs on a fragment 
-    // let statsFragment = document.createDocumentFragment()
-    // statsFragment.appendChild(log)
-    // gameStats.parentElement.append(statsFragment);
 }
 
+function updateLog(row, cell) {
+    userMove++ // Player clicks 
+    allMoves++
+    console.log(allMoves) // Check all the moves from the beggining 
 
+    let logLine = document.createElement("p")
+    if (userMove > 0) { // all moves minus dificulty (flips done before the user start playing)
+
+        numMoves.innerText = `Numbers of total flips ${userMove}`
+        logLine.innerHTML = `Flip # ${userMove} | row ${row + 1} cell ${cell + 1}`;
+        // add the log to the gameLog array
+        gameLog.push(logLine)
+
+        // create a fragment for the logs 
+        let statsFragment = document.createDocumentFragment()
+        statsFragment.appendChild(logLine)
+        gameStats.appendChild(statsFragment)
+
+    }
+}
 
 
